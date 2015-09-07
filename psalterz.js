@@ -48,10 +48,22 @@ function populateLinks() {
   });
 }
 
+function populateTodayPsalms() {
+  var dateObj = new Date();
+  var day = dateObj.getUTCDate();
+  var content = [];
+  for (i=0; i<5; i++) {
+    content.push(day + (i*30))
+  }
+    $("div#today").append($("<a>Dzisiaj: " + content.join(', ') + "</a>"));
+}
+
+
 $(function() {
   $.getJSON("wulgata-wujek.json", function(datax) {
     data = datax;
     populateLinks();
+    populateTodayPsalms();
     var psalmNumber = parseInt(window.location.hash.substring(1));
     if (isNaN(psalmNumber)) {
       psalmNumber = 1;
